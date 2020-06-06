@@ -1,0 +1,18 @@
+.spacer {
+  flex: 1 1 auto;
+}
+
+.task-card  {
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+.task-card:hover {
+  opacity: 1;
+  border-color: #c1c7cd;
+}
+
+@media only screen and (max-device-width: 400px){
+  .mob-hide{
+    display: none;
+  }
+}

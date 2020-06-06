@@ -1,0 +1,45 @@
+<mat-card class="mat-elevation-z0" style="background-color: #F7F9FB; border-radius: 20px; min-height: 88%;">
+  <div class="ui-g mob-hide" style="padding: 20px;">
+    <div class="ui-g-12 ui-sm-1 ui-md-2 ui-lg-2">
+      <mat-icon style="font-size: x-large; margin-right: 10px;">view_day</mat-icon>
+      <mat-icon style="font-size: x-large; color: #C5C5C5;">view_quilt</mat-icon>
+    </div>
+    <span class="spacer"></span>
+    <div class="ui-g-12 ui-sm-5 ui-md-5 ui-lg-5">
+      <mat-form-field appearance="none" style="font-size: small; width: 100px; margin-right: 50px;">
+        <mat-label>Label</mat-label>
+        <mat-select style="font-weight: 900;">
+          <mat-option value="INPROGRESS">Inprogress</mat-option>
+          <mat-option value="option2">Option 2</mat-option>
+          <mat-option value="option3">Option 3</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="none" style="font-size: small; width: 100px;">
+        <mat-label>Sort</mat-label>
+        <mat-select style="font-weight: 900;">
+          <mat-option value="INPROGRESS">Date</mat-option>
+          <mat-option value="option2">Due date</mat-option>
+          <mat-option value="option3">Starred</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="ui-g">
+    <div class="ui-g-12 ui-sm-12 ui-md-12 ui-lg-4" *ngFor="let item of sample">
+      <mat-card class="task-card mat-elevation-z0" style="border-radius: 30px; padding: 30px;">
+        <mat-card-title>
+          <span style="font-weight: 900; font-size: large;">Video Campaign</span>
+        </mat-card-title>
+        <mat-card-subtitle>Subtitle</mat-card-subtitle>
+        <mat-card-content>
+          <p>Sample Despription</p>
+        </mat-card-content>
+        <mat-card-actions align="end" style="padding-left: 9px;">
+          <mat-card-subtitle style="margin: 0px;">Date Created</mat-card-subtitle>
+          <span class="spacer"></span>
+          <mat-icon style="color: yellow;">star</mat-icon>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</mat-card>
