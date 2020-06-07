@@ -1,0 +1,23 @@
+<div class="ui-g" style="background-color: white; height: 100%;">
+  <div class="ui-g-12 ui-sm-12 ui-md-12 ui-lg-5" style="display: grid; justify-content: center; align-items: center;">
+    <img style="width: 70%; margin: 80px auto; " src="../../assets/img/home_page_2x.png" alt="">
+  </div>
+  <div class="ui-g-12 ui-sm-12 ui-md-12 ui-lg-5" style="display: grid; align-items: center;">
+    <mat-card style="padding: 50px; border-radius: 0px;">
+      <h1>Task Management</h1>
+      <mat-card-title style="width: 60%; margin: 10 0px 0 20px 0;">
+        Welcome Back, Please Login to Get started
+      </mat-card-title>
+      <mat-card-subtitle style="margin-bottom: 100px; padding-bottom: 20px; border-bottom: 1px solid black; width: 80%;">managemytask.web.app</mat-card-subtitle>
+      <button (click)="loginWithGoogle()" mat-raised-button style="background-color: black; color: #C5C5C5; border-radius: 0px; margin: auto; width: 80%; word-spacing: 5px; margin-bottom: 20px;">
+        <mat-icon style="margin: 10px;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 11h8.533c.044.385.067.78.067 1.184 0 2.734-.98 5.036-2.678 6.6-1.485 1.371-3.518 2.175-5.942 2.175A8.976 8.976 0 0 1 3 11.98 8.976 8.976 0 0 1 11.98 3c2.42 0 4.453.89 6.008 2.339L16.526 6.8C15.368 5.681 13.803 5 12 5a7 7 0 1 0 0 14c3.526 0 6.144-2.608 6.577-6H12v-2z" fill="rgba(255,255,255,1)"/></svg></mat-icon>
+        Google
+      </button>
+      <button (click)="loginWithAnonymous()" mat-raised-button style="background-color: black; color: #C5C5C5; border-radius: 0px; margin: auto; width: 80%; word-spacing: 5px;">
+        <mat-icon style="margin: 10px;">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 2a9.98 9.98 0 0 1 7.743 3.671L13.414 12l6.329 6.329A9.98 9.98 0 0 1 12 22C6.477 22 2 17.523 2 12S6.477 2 12 2zm0 3a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z" fill="rgba(255,255,255,1)"/></svg>        </mat-icon>
+        Anonymous
+      </button>
+    </mat-card>
+  </div>
+</div>

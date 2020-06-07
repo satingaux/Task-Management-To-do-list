@@ -9,6 +9,12 @@
   "hosting": {
     "site": "managemytask",
     "public": "dist/task-management",
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ],
     "ignore": [
       "firebase.json",
       "**/.*",

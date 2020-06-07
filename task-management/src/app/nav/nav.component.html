@@ -1,11 +1,11 @@
-<mat-sidenav-container class="sidenav-container" (backdropClick)="leftdrawer.close()" style="background-color: #0D2A39;">
+<mat-sidenav-container class="sidenav-container" *ngIf="isAuthenticated" (backdropClick)="leftdrawer.close()">
   <mat-sidenav #leftdrawer class="sidenav" fixedInViewport
       [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
       [mode]="(isHandset$ | async) ? 'over' : 'side'"
       [opened]="(isHandset$ | async) === false"
-      style="padding: 20px 40px 0px 40px; border-left: 10px solid#0D2A39; border-radius: 30px 0px 0px 30px;">
+      style="padding: 20px 40px 0px 40px;">
       <button mat-mini-fab class="mat-elevation-z1" (click)="leftdrawer.toggle()" color="default">
-        <mat-icon>chevron_left</mat-icon>
+        <mat-icon style="color: #FB8C72;">chevron_left</mat-icon>
       </button>
       <br>
     <mat-toolbar style="text-align: center; font-weight: 700; color: #0D2A39; padding: 55px;">Begin a new task</mat-toolbar>
@@ -22,7 +22,8 @@
         <mat-label>Subtitle</mat-label>
         <input matInput placeholder="Subtitle" [formControl]="subtitleControl" maxlength="10">
         <mat-icon matSuffix style="color: #40B1B0;">subtitles</mat-icon>
-        <mat-error *ngIf="subtitleControl.invalid">Max size: 10px</mat-error>
+        <mat-error *ngIf="subtitleControl.invalid" align="end">Max 10 characters</mat-error>
+        <mat-hint *ngIf="subtitleControl.value" align="end">{{subtitleControl.value?.length || 0}}/15</mat-hint>
       </mat-form-field>
       <br>
       <mat-form-field appearance="outline">
@@ -40,7 +41,7 @@
         <mat-datepicker #picker1 [startAt]="startDate"></mat-datepicker>
       </mat-form-field>
       <br>
-      <button mat-raised-button class="mat-elevation-z4" (click)="createTask(); leftdrawer.close();" [disabled]="form.invalid" color="default" style="font-weight: 800; margin: 10px; border-bottom: 2px solid #0D2A39; border-radius: 300px; padding: 3px 25px 3px 25px;">Create task</button>
+      <button mat-raised-button class="mat-elevation-z4" (click)="createTask(); leftdrawer.close();" [disabled]="form.invalid" color="default" style="font-weight: 800; margin: 10px; border-radius: 300px; padding: 3px 25px 3px 25px;">Create task</button>
     </form>
   </mat-sidenav>
 
@@ -50,12 +51,12 @@
       [mode]="(isHandset$ | async) ? 'over' : 'side'"
       [opened]="(isHandset$ | async) === false"
       position="end"
-      style="width: 350px; border-right: 10px solid #0D2A39; border-radius: 0 30px 30px 0;">
+      style="width: 350px;">
     <mat-toolbar style="background-color: white;">
       <span class="spacer"></span>
-      <button class="icon mat-elevation-z1" mat-mini-fab color="default"><mat-icon aria-hidden="false" aria-label="Example search icon">search</mat-icon></button>
       <button class="icon mat-elevation-z1" mat-mini-fab color="default"><mat-icon aria-hidden="false" aria-label="Example heart icon">grade</mat-icon></button>
-      <button class="icon mat-elevation-z1" mat-mini-fab color="default"><mat-icon aria-hidden="false" aria-label="Example heart icon">notifications</mat-icon></button>
+      <button (click)="snackbarService.openSnackBar('Your information is being stored with sceured encription.', 'close')" class="icon mat-elevation-z1" mat-mini-fab color="default"><mat-icon aria-hidden="false" aria-label="Example search icon">security</mat-icon></button>
+      <button (click)="afAuth.signOut(); this.snackbarService.openSnackBar('Signout successfully.', 'close')" class="icon mat-elevation-z1" mat-mini-fab color="default"><mat-icon aria-hidden="false" aria-label="Example heart icon">settings_power</mat-icon></button>
       <span class="spacer"></span>
     </mat-toolbar>
     <mat-nav-list style="padding: 20px;">
@@ -63,7 +64,7 @@
       <mat-card class="mat-elevation-z0">
         <div class="ui-g">
           <div class="ui-g-12 ui-sm-6 ui-md-6 ui-lg-6" style="display: grid; align-items: center;">
-            <span>Hello,<h2 style="margin: 0px;">Shazian</h2></span>
+            <span>Hello,<h2 *ngIf="currentUser.displayName!==null;" style="margin: 0px;">{{currentUser.displayName}}</h2><h2 *ngIf="currentUser.displayName===null" style="margin: 0px;">Shazian{{currentUser.displayName}}</h2></span>
           </div>
           <div class="ui-g-12 ui-sm-6 ui-md-6 ui-lg-6" style="display: grid; align-items: center; justify-content: center;">
             <img src="../../assets/img/avtar.png" mat-card-avatar style="width: 140px; height: 140px;">
@@ -76,21 +77,21 @@
 
       <mat-card class="mat-elevation-z0">
         <div class="ui-g">
-          <div class="ui-g-12 ui-sm-6 ui-md-6 ui-lg-6" style="display: grid; align-items: center; margin-bottom: 30px;">
+          <div ng-repeat="item in data | groupBy: 'properties.STATUS' " class="ui-g-12 ui-sm-6 ui-md-6 ui-lg-6" style="display: grid; align-items: center; margin-bottom: 30px;">
             <mat-card-subtitle>Total Tasks:</mat-card-subtitle>
-            <h1 style="line-height:80%; margin: 0; border-left: 4px solid #7B61B2; padding-left: 10px;">189</h1>
+            <h1 style="line-height:80%; margin: 0; border-left: 4px solid #7B61B2; padding-left: 10px;">{{dataStatus.TOTALTASKS}}</h1>
           </div>
           <div class="ui-g-12 ui-sm-6 ui-md-6 ui-lg-6" style="display: grid; align-items: center; margin-bottom: 30px;">
             <mat-card-subtitle>Completed:</mat-card-subtitle>
-            <h1 style="line-height:80%; margin: 0; border-left: 4px solid #40B1B0; padding-left: 10px;">174</h1>
+            <h1 style="line-height:80%; margin: 0; border-left: 4px solid #40B1B0; padding-left: 10px;">{{dataStatus.COMPLETED}}</h1>
           </div>
           <div class="ui-g-12 ui-sm-6 ui-md-6 ui-lg-6" style="display: grid; align-items: center; margin-bottom: 30px;">
             <mat-card-subtitle>In progress:</mat-card-subtitle>
-            <h1 style="line-height:80%; margin: 0; border-left: 4px solid #FFA751; padding-left: 10px;">13</h1>
+            <h1 style="line-height:80%; margin: 0; border-left: 4px solid #FFA751; padding-left: 10px;">{{dataStatus.INPROGRESS}}</h1>
           </div>
           <div class="ui-g-12 ui-sm-6 ui-md-6 ui-lg-6" style="display: grid; align-items: center; margin-bottom: 30px;">
             <mat-card-subtitle>Out of schedule:</mat-card-subtitle>
-            <h1 style="line-height:80%; margin: 0; border-left: 4px solid #FF5656; padding-left: 10px;">2</h1>
+            <h1 style="line-height:80%; margin: 0; border-left: 4px solid #FF5656; padding-left: 10px;">{{dataStatus.OUTOFSCHEDULE}}</h1>
           </div>
           <div class="ui-g-12 ui-sm-8 ui-md-8 ui-lg-8" style="display: grid; justify-content: center; align-items: center;">
             <mat-divider></mat-divider>
@@ -120,11 +121,11 @@
         mat-icon-button
         (click)="leftdrawer.toggle()"
         *ngIf="isHandset$ | async">
-        <mat-icon aria-label="Side nav toggle icon" style="color: #0D2A39; font-weight: 900;">add</mat-icon>
+        <mat-icon aria-label="Side nav toggle icon" style="color: #FB8C72; font-weight: 900; font-size: xx-large;">add</mat-icon>
       </button>
       <span class="mob-font-reduce title">Task <span style="color: #C5C5C5">Management</span></span>
       <span class="spacer"></span>
-      <button mat-raised-button (click)="leftdrawer.toggle()" class="mat-elevation-z4 mob-hide" color="primary" style="margin-right: 20px; border-radius: 300px; padding: 3px 25px 3px 25px; background-color: #0D2A39;">Start a new task</button>
+      <button mat-raised-button (click)="leftdrawer.toggle()" class="mat-elevation-z4 mob-hide" color="primary" style="margin-right: 20px; border-radius: 300px; padding: 3px 25px 3px 25px; background-color: #40B1B0;">Start a new task</button>
       <img (click)="rightdrawer.toggle()" src="../../assets/img/avtar.png" class="mat-elevation-z0" mat-card-avatar style="cursor: pointer; width: 50px; height: 50px;">
     </mat-toolbar>
     <app-dashboard></app-dashboard>
